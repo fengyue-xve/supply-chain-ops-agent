@@ -1,0 +1,40 @@
+{
+  "case_id": "confirmation-004",
+  "note": "回放：Java 侧 403（viewer 无权），错误信息须原样透传到回复。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-confirmation-004-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "查询被拒绝：当前账号无权限访问库存查询工具，请联系管理员开通权限。"
+          }
+        }
+      ]
+    }
+  ]
+}

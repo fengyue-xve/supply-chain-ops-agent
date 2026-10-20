@@ -1,0 +1,40 @@
+{
+  "case_id": "tool-003",
+  "note": "回放：类目参数走 category 分支（不带 skus）。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-003-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"category\": \"audio\"}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "音频类目共 4 个 SKU：AUD-001 主动降噪蓝牙耳机（18）、AUD-002 桌面蓝牙音箱（6）、AUD-003 头戴式降噪耳机（12）、AUD-004 无线领夹麦克风（10）。"
+          }
+        }
+      ]
+    }
+  ]
+}

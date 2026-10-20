@@ -1,0 +1,18 @@
+{
+  "case_id": "knowledge-005",
+  "note": "手工夹具（依据 knowledge/supply-ops.zh.md 库存快照与数据时点段撰写）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "库存数据来自最新库存快照，可售数量 availableQty 对应快照日期 snapDate；销量窗口以最近一次业务数据日作为基准日，往前取 N 个自然日。两者都不是实时流水，回答时应当说明数据时点，不要把快照数据说成「此刻实时」。"
+          }
+        }
+      ]
+    }
+  ]
+}

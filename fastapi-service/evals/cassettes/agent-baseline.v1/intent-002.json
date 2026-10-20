@@ -1,0 +1,40 @@
+{
+  "case_id": "intent-002",
+  "note": "回放：单次工具调用携带两个 SKU，模型汇总两个库存数字。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-intent-002-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\", \"CHG-001\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-001 主动降噪蓝牙耳机当前库存 18 件（low）；CHG-001 65W氮化镓快充充电器当前库存 25 件（ok）。"
+          }
+        }
+      ]
+    }
+  ]
+}

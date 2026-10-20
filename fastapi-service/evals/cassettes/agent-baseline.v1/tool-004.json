@@ -1,0 +1,40 @@
+{
+  "case_id": "tool-004",
+  "note": "回放：类目销量查询，days 固定 30。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-004-1",
+                "type": "function",
+                "function": {
+                  "name": "query-sales",
+                  "arguments": "{\"category\": \"charging\", \"days\": 30}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "充电类目近 30 天：CHG-001 46 件（日均 1.53）、CHG-002 12 件（0.40）、CHG-003 7 件（0.23）。"
+          }
+        }
+      ]
+    }
+  ]
+}

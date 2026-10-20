@@ -1,0 +1,62 @@
+{
+  "case_id": "tool-008",
+  "note": "回放：跨轮顺序调用（第一轮库存，第二轮补货建议），round 须为 1/2。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-008-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-008-2",
+                "type": "function",
+                "function": {
+                  "name": "suggest-replenish",
+                  "arguments": "{\"skus\": [\"AUD-001\"], \"days\": 7}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-001 当前库存 18 件、档位 low；按 14 天覆盖建议补货 12 件。"
+          }
+        }
+      ]
+    }
+  ]
+}

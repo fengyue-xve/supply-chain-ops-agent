@@ -1,0 +1,18 @@
+{
+  "case_id": "intent-010",
+  "note": "回放：缺 SKU 时先追问，不调用任何工具。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "请告诉我要查询的 SKU（或类目），我可以查看它们的库存水位。"
+          }
+        }
+      ]
+    }
+  ]
+}

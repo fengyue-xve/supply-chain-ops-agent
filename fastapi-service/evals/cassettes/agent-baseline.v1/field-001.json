@@ -1,0 +1,40 @@
+{
+  "case_id": "field-001",
+  "note": "回放：第二轮模型 content 为空（null）且无 tool_calls，走编排层 render 组装路径，逐条渲染中文品名。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-field-001-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"category\": \"audio\"}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": null
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "case_id": "knowledge-001",
+  "note": "手工夹具（依据 knowledge/supply-ops.zh.md 库存档位段撰写）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "库存档位按可售数量 availableQty 划分：low 表示库存大于 0 但不足 20，属于偏低；ok 表示在 20 到 200 之间（含两端），属于正常。另外两档是 out（小于等于 0，缺货）和 high（大于 200，偏高）。档位阈值目前是固定值。"
+          }
+        }
+      ]
+    }
+  ]
+}

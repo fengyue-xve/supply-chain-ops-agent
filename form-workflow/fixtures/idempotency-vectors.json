@@ -1,0 +1,55 @@
+{
+  "fixture_version": "1.0.0",
+  "description": "幂等键/记录摘要派生已知向量。算法（contracts/README.md）：idempotency_key = FLOW_IDK_ + sha256(source_record_id + \":\" + flow_type + \":\" + business_version) 前 16 位小写十六进制；record_ref = sha256(source_record_id) 前 12 位。Java 与 Node 两侧各自独立实现，均需通过本文件全部向量。",
+  "vectors": [
+    {
+      "source_record_id": "R-1001",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 3,
+      "idempotency_key": "FLOW_IDK_176e0d5d198c9806",
+      "record_ref": "aeb28f94adb0"
+    },
+    {
+      "source_record_id": "R-1002",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 1,
+      "idempotency_key": "FLOW_IDK_13a08b90ce29f83a",
+      "record_ref": "5636fa6e0a4a"
+    },
+    {
+      "source_record_id": "R-1003",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 2,
+      "idempotency_key": "FLOW_IDK_dea057880bae31e5",
+      "record_ref": "7128a197ba2e"
+    },
+    {
+      "source_record_id": "R-8001",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 7,
+      "idempotency_key": "FLOW_IDK_6aba7a043da98a25",
+      "record_ref": "437fb3e34fdb"
+    },
+    {
+      "source_record_id": "R-9002",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 4,
+      "idempotency_key": "FLOW_IDK_bf55ad7a7e449b84",
+      "record_ref": "7f25b1257e18"
+    },
+    {
+      "source_record_id": "R-9003",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 5,
+      "idempotency_key": "FLOW_IDK_4f42bb11106fad23",
+      "record_ref": "492f7e0ef556"
+    },
+    {
+      "source_record_id": "R-9004",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 6,
+      "idempotency_key": "FLOW_IDK_2ce4752056ba1893",
+      "record_ref": "23bd8fe23726"
+    }
+  ]
+}

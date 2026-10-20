@@ -1,0 +1,18 @@
+{
+  "case_id": "intent-011",
+  "note": "回放：销量问题缺 SKU/类目时追问，并给出窗口选项。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "请补充要查询的 SKU 或类目；销量支持近 7 天或近 30 天两个窗口。"
+          }
+        }
+      ]
+    }
+  ]
+}

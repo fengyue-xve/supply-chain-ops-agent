@@ -1,0 +1,40 @@
+{
+  "case_id": "intent-009",
+  "note": "回放：库存充足场景，建议量为 0，不误报紧急。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-intent-009-1",
+                "type": "function",
+                "function": {
+                  "name": "suggest-replenish",
+                  "arguments": "{\"skus\": [\"AUD-002\"], \"days\": 7}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-002 桌面蓝牙音箱当前库存 50 件，足以覆盖目标天数，无需补货（建议量 0 件）。"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "case_id": "intent-008",
+  "note": "回放：AUD-001 建议量计算。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-intent-008-1",
+                "type": "function",
+                "function": {
+                  "name": "suggest-replenish",
+                  "arguments": "{\"skus\": [\"AUD-001\"], \"days\": 7}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-001 主动降噪蓝牙耳机当前库存 18 件、日均 0.71 件，按 14 天覆盖建议补货 12 件。"
+          }
+        }
+      ]
+    }
+  ]
+}

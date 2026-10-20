@@ -1,0 +1,40 @@
+{
+  "case_id": "intent-003",
+  "note": "回放：只查库存档位并说明偏低，不编造可售天数。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-intent-003-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-001 当前库存 18 件，档位 low（偏低）。如需评估还能卖多少天，我可以再查近 7 天或 30 天的销量。"
+          }
+        }
+      ]
+    }
+  ]
+}

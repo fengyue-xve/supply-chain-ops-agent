@@ -1,0 +1,40 @@
+{
+  "case_id": "field-002",
+  "note": "回放：content 为空走 render 组装，missingSkus 须渲染为「未找到这些 SKU 的记录」行。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-field-002-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\", \"AUD-999\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": null
+          }
+        }
+      ]
+    }
+  ]
+}

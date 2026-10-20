@@ -1,0 +1,40 @@
+{
+  "case_id": "intent-001",
+  "note": "回放：模型先查 AUD-001 库存，再基于工具结果作答（协议形状与 DeepSeek Chat Completions 一致）。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-intent-001-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-001 主动降噪蓝牙耳机当前库存 18 件，档位 low（偏低），快照日期 2026-09-03。"
+          }
+        }
+      ]
+    }
+  ]
+}

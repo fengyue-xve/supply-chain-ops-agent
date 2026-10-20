@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://supply-flow.demo/contracts/tools.schema.json",
+  "title": "ToolRoutingTable",
+  "description": "工具 ↔ 端点路由表。Node 侧依此构建 Agent 工具；Java 侧契约测试断言每个条目在服务中真实存在且角色/迁移一致。",
+  "contract_version": "1.0.0",
+  "roles": {
+    "enum": ["operator", "approver", "agent", "reader"]
+  },
+  "apply_outcome": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["outcome", "run"],
+    "properties": {
+      "outcome": { "enum": ["APPLIED", "SKIPPED", "FAILED", "UNCERTAIN"] },
+      "message": { "type": "string" },
+      "run": {
+        "type": "object",
+        "required": ["run_id", "status", "apply_result", "write_count"],
+        "properties": {
+          "run_id": { "type": "string" },
+          "status": { "type": "string" },
+          "apply_result": { "enum": ["NONE", "APPLIED", "SKIPPED"] },
+          "write_count": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  },
+  "agent_tools": {
+    "get_form_record": {
+      "method": "GET",
+      "path": "/api/flow/records/{record_id}",
+      "roles": ["operator", "approver", "agent", "reader"],
+      "side_effect": "none",
+      "params": {
+        "type": "object",
+        "required": ["record_id"],
+        "properties": { "record_id": { "type": "string", "pattern": "^R-[0-9]{4}$" } }
+      },
+      "response_schema": "record.schema.json"
+    },
+    "validate_transition": {
+      "method": "POST",
+      "path": "/api/flow/validate-transition",
+      "roles": ["agent"],
+      "side_effect": "none",
+      "params": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_record_id", "flow_type", "business_version"],
+        "properties": {
+          "source_record_id": { "type": "string", "pattern": "^R-[0-9]{4}$" },
+          "flow_type": { "enum": ["PRELOAD_OUTER_BOX_MARK"] },
+          "business_version": { "type": "integer", "minimum": 1 }
+        }
+      },
+      "response": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["allowed", "reasons", "expected_record_version"],
+        "properties": {
+          "allowed": { "type": "boolean" },
+          "reasons": { "type": "array", "items": { "type": "string" } },
+          "expected_record_version": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "plan_transition": {
+      "method": "POST",
+      "path": "/api/flow/runs/{run_id}/plan",
+      "roles": ["agent"],
+      "side_effect": "state_transition",
+      "transition": "RECEIVED->PLANNED",
+      "params_schema": "plan.schema.json",
+      "response_schema": "run-status.schema.json"
+    },
+    "get_run": {
+      "method": "GET",
+      "path": "/api/flow/runs/{run_id}",
+      "roles": ["operator", "approver", "agent", "reader"],
+      "side_effect": "none",
+      "params": {
+        "type": "object",
+        "required": ["run_id"],
+        "properties": { "run_id": { "type": "string", "pattern": "^run-[0-9a-f]{12}$" } }
+      },
+      "response_schema": "run-status.schema.json"
+    },
+    "request_approval": {
+      "method": "POST",
+      "path": "/api/flow/runs/{run_id}/request-approval",
+      "roles": ["agent"],
+      "side_effect": "state_transition",
+      "transition": "PLANNED->WAITING_APPROVAL",
+      "params": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": { "note": { "type": "string", "maxLength": 200 } }
+      },
+      "response_schema": "run-status.schema.json"
+    },
+    "apply_transition": {
+      "method": "POST",
+      "path": "/api/flow/runs/{run_id}/apply",
+      "roles": ["agent"],
+      "side_effect": "write",
+      "transition": "EXECUTING->SUCCEEDED | EXECUTING->FAILED->MANUAL_REVIEW",
+      "notes": "必须已 APPROVED。未批准（run 处于 WAITING_APPROVAL 等状态）时零写入返回 409 INVALID_TRANSITION。已 SUCCEEDED 的重复 apply → outcome=SKIPPED 零写入。",
+      "params": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "response": "apply_outcome"
+    },
+    "replay_failed": {
+      "method": "POST",
+      "path": "/api/flow/runs/{run_id}/replay",
+      "roles": ["agent"],
+      "side_effect": "write",
+      "transition": "MANUAL_REVIEW->REPLAYING->SUCCEEDED | REPLAYING->FAILED->MANUAL_REVIEW",
+      "notes": "仅接受 MANUAL_REVIEW；其他状态 409 INVALID_TRANSITION。重放走与 apply 相同的写入路径 + 幂等键回查对账；已成功项（其他 run）不受影响。",
+      "params": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "response": "apply_outcome"
+    }
+  },
+  "human_actions": {
+    "submit_event": {
+      "method": "POST",
+      "path": "/api/flow/events",
+      "roles": ["operator"],
+      "side_effect": "write",
+      "params_schema": "flow-event.schema.json",
+      "response": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["run_id", "status", "deduplicated"],
+        "properties": {
+          "run_id": { "type": "string" },
+          "status": { "type": "string" },
+          "deduplicated": { "type": "boolean" }
+        }
+      }
+    },
+    "approve": {
+      "method": "POST",
+      "path": "/api/flow/runs/{run_id}/approve",
+      "roles": ["approver"],
+      "side_effect": "state_transition",
+      "transition": "WAITING_APPROVAL->EXECUTING",
+      "params": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": { "note": { "type": "string", "maxLength": 200 } }
+      },
+      "response_schema": "run-status.schema.json"
+    },
+    "reject": {
+      "method": "POST",
+      "path": "/api/flow/runs/{run_id}/reject",
+      "roles": ["approver"],
+      "side_effect": "state_transition",
+      "transition": "WAITING_APPROVAL->REJECTED",
+      "params": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["reason"],
+        "properties": { "reason": { "type": "string", "minLength": 1, "maxLength": 200 } }
+      },
+      "response_schema": "run-status.schema.json"
+    }
+  },
+  "observability": {
+    "get_stats": {
+      "method": "GET",
+      "path": "/api/flow/stats",
+      "roles": ["operator", "approver", "agent", "reader"],
+      "side_effect": "none",
+      "response": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "run_count",
+          "runs_by_status",
+          "total_write_count",
+          "total_skip_count",
+          "total_manual_review",
+          "apply_endpoint_hits",
+          "replay_endpoint_hits"
+        ],
+        "properties": {
+          "run_count": { "type": "integer", "minimum": 0 },
+          "runs_by_status": { "type": "object" },
+          "total_write_count": { "type": "integer", "minimum": 0 },
+          "total_skip_count": { "type": "integer", "minimum": 0 },
+          "total_manual_review": { "type": "integer", "minimum": 0 },
+          "apply_endpoint_hits": { "type": "integer", "minimum": 0, "description": "POST /apply 端点在服务生命周期内被请求的次数（含被拒请求），用于证明未批准时零触达" },
+          "replay_endpoint_hits": { "type": "integer", "minimum": 0, "description": "POST /replay 端点在服务生命周期内被请求的次数（含被拒请求）" }
+        }
+      }
+    }
+  }
+}

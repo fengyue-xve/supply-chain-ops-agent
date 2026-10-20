@@ -1,0 +1,40 @@
+{
+  "case_id": "intent-004",
+  "note": "回放：近 7 天窗口销量查询。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-intent-004-1",
+                "type": "function",
+                "function": {
+                  "name": "query-sales",
+                  "arguments": "{\"sku\": \"AUD-001\", \"days\": 7}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-001 近 7 天总销量 5 件，日均 0.71 件，窗口 2026-08-28 ~ 2026-09-03。"
+          }
+        }
+      ]
+    }
+  ]
+}

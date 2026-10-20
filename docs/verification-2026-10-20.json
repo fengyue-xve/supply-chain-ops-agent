@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-20",
+  "scope": "local isolated synthetic MySQL + Java HTTP + scripted providers; not real model accuracy",
+  "java_operations": {
+    "tests": 274,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "java_forms": {
+    "tests": 29,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "python": {
+    "passed": 344,
+    "skipped": 3,
+    "skip_reason": "Windows symbolic link capability unavailable"
+  },
+  "vue": {
+    "passed": 149,
+    "production_build": "passed"
+  },
+  "pi_node": {
+    "passed": 19,
+    "typecheck": "passed"
+  },
+  "http_integration": {
+    "passed": 27
+  },
+  "pi_cross_process": {
+    "passed": 73,
+    "total": 73,
+    "scenarios": 7
+  },
+  "retrieval_current_development": {
+    "passed": 30,
+    "total": 30
+  },
+  "retrieval_rephrasing_audit": {
+    "passed": 10,
+    "total": 12,
+    "failures": [
+      {
+        "case_id": "current-business-holdout-004",
+        "details": [
+          "缺少期望 chunk ['supply-ops.zh#replenish-params-1']；实际注入 ['supply-ops.zh#replenish-formula-1']"
+        ]
+      },
+      {
+        "case_id": "current-business-holdout-005",
+        "details": [
+          "注入了 forbidden chunk ['supply-ops.zh#missing-skus-1']"
+        ]
+      }
+    ]
+  },
+  "form_outage": {
+    "form_http": 503,
+    "stock_http": 200
+  },
+  "not_verified": [
+    "live model quality/cost",
+    "Docker runtime",
+    "production scale",
+    "real enterprise integrations"
+  ]
+}

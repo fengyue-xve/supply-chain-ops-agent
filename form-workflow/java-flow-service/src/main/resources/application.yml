@@ -1,0 +1,22 @@
+server:
+  address: 127.0.0.1
+  port: 8081
+
+spring:
+  application:
+    name: java-flow-service
+  datasource:
+    # 演示/测试：H2 内存库。生产配置思路见 application-mysql.yml（不启用）。
+    url: jdbc:h2:mem:flowagent;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  sql:
+    init:
+      mode: always
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+flow:
+  # fixtures 与 Pi 侧共用同一份文件；从 java-flow-service/ 运行时指向 ../fixtures
+  fixtures-dir: ${FLOW_FIXTURES_DIR:../fixtures}

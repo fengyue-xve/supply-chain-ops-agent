@@ -1,0 +1,81 @@
+{
+  "fixture_version": "1.0.0",
+  "description": "脱敏预装单记录。全部虚构，字段值与真实业务无关。demo_fault 为本地表单适配器故障注入配置（仅 demo，服务端按此模拟表单系统行为）。",
+  "records": [
+    {
+      "record_id": "R-1001",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 3,
+      "sku_code": "AUD-001",
+      "mark_rule": "RULE_BOX_A",
+      "current_mark": null,
+      "demo_fault": null
+    },
+    {
+      "record_id": "R-1002",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 1,
+      "sku_code": "CHG-001",
+      "mark_rule": "RULE_BOX_B",
+      "current_mark": null,
+      "demo_fault": null
+    },
+    {
+      "record_id": "R-1003",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 2,
+      "sku_code": "AUD-003",
+      "mark_rule": "RULE_BOX_A",
+      "current_mark": {
+        "value": "LZL04",
+        "rule_source": "fixture-rule:box-a-v1"
+      },
+      "demo_fault": null
+    },
+    {
+      "record_id": "R-8001",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 7,
+      "sku_code": "CHG-002",
+      "mark_rule": "RULE_BOX_B",
+      "current_mark": null,
+      "demo_fault": null
+    },
+    {
+      "record_id": "R-9002",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 4,
+      "sku_code": "CHG-003",
+      "mark_rule": "RULE_BOX_A",
+      "current_mark": null,
+      "demo_fault": {
+        "kind": "WRITE_FAIL_ONCE",
+        "remaining": 1
+      }
+    },
+    {
+      "record_id": "R-9003",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 5,
+      "sku_code": "ACC-001",
+      "mark_rule": "RULE_BOX_B",
+      "current_mark": null,
+      "demo_fault": {
+        "kind": "WRITE_FAIL_ALWAYS",
+        "remaining": null
+      }
+    },
+    {
+      "record_id": "R-9004",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 6,
+      "sku_code": "ACC-002",
+      "mark_rule": "RULE_BOX_B",
+      "current_mark": null,
+      "demo_fault": {
+        "kind": "WRITE_UNCERTAIN",
+        "remaining": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://supply-flow.demo/contracts/run-status.schema.json",
+  "title": "FlowRunView",
+  "description": "运行视图。GET /api/flow/runs/{run_id} 响应；approve/reject/plan/request-approval 的成功响应亦为本形状。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "source_record_id",
+    "flow_type",
+    "business_version",
+    "idempotency_key",
+    "status",
+    "apply_result",
+    "plan",
+    "approval",
+    "failure_reason",
+    "write_count",
+    "replay_count",
+    "created_at",
+    "updated_at",
+    "audit"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^run-[0-9a-f]{12}$"
+    },
+    "source_record_id": {
+      "type": "string"
+    },
+    "flow_type": {
+      "enum": ["PRELOAD_OUTER_BOX_MARK"]
+    },
+    "business_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "idempotency_key": {
+      "type": "string",
+      "pattern": "^FLOW_IDK_[0-9a-f]{16}$"
+    },
+    "status": {
+      "$ref": "#/$defs/run_status"
+    },
+    "apply_result": {
+      "$ref": "#/$defs/apply_result"
+    },
+    "plan": {
+      "type": ["object", "null"],
+      "description": "plan.schema.json 的 TransitionPlan；未生成计划时为 null。"
+    },
+    "approval": {
+      "type": ["object", "null"],
+      "required": ["decision", "actor_id", "decided_at"],
+      "properties": {
+        "decision": {
+          "enum": ["APPROVED", "REJECTED"]
+        },
+        "actor_id": {
+          "type": "string"
+        },
+        "decided_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "note": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "failure_reason": {
+      "type": ["string", "null"]
+    },
+    "write_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "本 run 实际发生的表单数据写入次数（no-op/幂等命中不计）。"
+    },
+    "replay_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "audit": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/audit_entry"
+      }
+    }
+  },
+  "$defs": {
+    "run_status": {
+      "description": "唯一状态字典。合法迁移见 contracts/README.md。",
+      "enum": [
+        "RECEIVED",
+        "PLANNED",
+        "WAITING_APPROVAL",
+        "EXECUTING",
+        "SUCCEEDED",
+        "REJECTED",
+        "FAILED",
+        "MANUAL_REVIEW",
+        "REPLAYING"
+      ]
+    },
+    "apply_result": {
+      "enum": ["NONE", "APPLIED", "SKIPPED"]
+    },
+    "audit_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["seq", "ts", "event_type", "actor_id"],
+      "properties": {
+        "seq": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "event_type": {
+          "enum": [
+            "RUN_CREATED",
+            "EVENT_DEDUPLICATED",
+            "PLAN_RECORDED",
+            "APPROVAL_REQUESTED",
+            "APPROVED",
+            "REJECTED",
+            "APPLY_STARTED",
+            "RECORD_WRITTEN",
+            "APPLY_SKIPPED",
+            "APPLY_FAILED",
+            "APPLY_UNCERTAIN",
+            "MANUAL_REVIEW_ENTERED",
+            "REPLAY_STARTED",
+            "REPLAY_FINISHED"
+          ]
+        },
+        "actor_id": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "object",
+          "description": "脱敏细节。禁止出现 token、完整 record_id、完整工具参数值。"
+        }
+      }
+    }
+  }
+}

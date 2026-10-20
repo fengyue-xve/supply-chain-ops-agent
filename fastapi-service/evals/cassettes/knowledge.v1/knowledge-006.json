@@ -1,0 +1,18 @@
+{
+  "case_id": "knowledge-006",
+  "note": "手工夹具（依据 knowledge/supply-ops.zh.md 采购单与人工确认段撰写）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "需要。create-purchase-order 创建的是待人工确认的采购单，不会直接生效；确认动作必须由人工完成，助手不会代替人工确认，也不会声称已完成确认。当前对话只做只读查询，涉及创建或确认采购单时会说明需要人工操作。"
+          }
+        }
+      ]
+    }
+  ]
+}

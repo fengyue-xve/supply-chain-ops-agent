@@ -1,0 +1,40 @@
+{
+  "case_id": "field-003",
+  "note": "回放：trace 字段完整性用例（request_id/conversation_id 显式回显、tc- 前缀、round/params 形状）。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-field-003-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"CHG-001\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "CHG-001 65W氮化镓快充充电器当前库存 25 件，快照 2026-09-03。"
+          }
+        }
+      ]
+    }
+  ]
+}

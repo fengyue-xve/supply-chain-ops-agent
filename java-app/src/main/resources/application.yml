@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: supply-agent
+
+server:
+  port: 8080
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+
+logging:
+  level:
+    root: info
+    com.demo.supplyagent: debug
+
+# W2-D1 JWT:secret 只允许从环境变量 JWT_SECRET 注入,留空由 JwtService 启动期强校验拒绝;
+# 过期时长默认 24h,可用 JWT_EXPIRE_HOURS 覆盖。
+# W2-D3 对话代理:FastAPI Gateway 地址与 30s 超时,可用 AGENT_GATEWAY_BASE_URL 覆盖。
+app:
+  forms-gateway:
+    base-url: ${FLOW_SERVICE_BASE_URL:http://127.0.0.1:8081}
+    read-token: ${FLOW_READ_TOKEN:token-reader-1}
+    timeout-seconds: 2
+  jwt:
+    secret: ${JWT_SECRET:}
+    expire-hours: ${JWT_EXPIRE_HOURS:24}
+  agent-gateway:
+    base-url: ${AGENT_GATEWAY_BASE_URL:http://127.0.0.1:8000}
+    timeout-seconds: ${AGENT_GATEWAY_TIMEOUT_SECONDS:30}
+
+# 数据源按 profile 提供：
+#   dev  = 本机 MySQL supply_agent（凭据在仓库根 .env.local，见 application-dev.yml）
+#   test = 本机 MySQL supply_agent_test（凭据仅从环境变量注入，见 application-test.yml）

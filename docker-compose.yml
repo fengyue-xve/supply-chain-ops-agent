@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:8.0.36
+    environment:
+      MYSQL_ROOT_PASSWORD: demo-only-root
+      MYSQL_DATABASE: supply_agent
+      MYSQL_USER: supply_agent
+      MYSQL_PASSWORD: demo-only-db
+    ports:
+      - "127.0.0.1:13306:3306"
+    volumes:
+      - demo_mysql:/var/lib/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+      - ./deployment/test-database.sql:/docker-entrypoint-initdb.d/03-test-database.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pdemo-only-root"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+volumes:
+  demo_mysql:

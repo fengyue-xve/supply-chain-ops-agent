@@ -1,0 +1,40 @@
+{
+  "case_id": "tool-009",
+  "note": "回放：Java 返回 400 校验错误（java_tool_errors 注入），错误信息须透传到回复，不得编造数字。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-009-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "查询没有完成：参数校验失败（skus 最多 20 个），请分两批重试，我不会编造库存数字。"
+          }
+        }
+      ]
+    }
+  ]
+}

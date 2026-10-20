@@ -1,0 +1,52 @@
+name: Verify synthetic demo
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0.36
+        env:
+          MYSQL_ROOT_PASSWORD: demo-only-root
+          MYSQL_DATABASE: supply_agent_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pdemo-only-root"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    env:
+      SUPPLY_DB_HOST: 127.0.0.1
+      SUPPLY_DB_PORT: 3306
+      SUPPLY_DB_USER: root
+      SUPPLY_DB_PASSWORD: demo-only-root
+      AGENT_PROVIDER: demo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.19.0'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r fastapi-service/requirements.txt
+      - run: python scripts/demo.py prepare
+      - run: python scripts/verify.py
+      - name: Retain failed holdout audit without treating it as a green metric
+        run: |
+          cd fastapi-service
+          set +e
+          python -m evals.holdout_audit --out ../artifacts/holdout.json
+          code=$?
+          test "$code" -eq 0 -o "$code" -eq 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification
+          path: artifacts/

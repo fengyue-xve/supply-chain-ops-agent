@@ -1,0 +1,14 @@
+{
+  "fixture_version": "1.0.0",
+  "description": "外箱唛填充规则表（服务端真值）。records.json 中记录的 mark_rule 指向此表；Java 侧强校验计划中的 proposed_value / rule_source 与本表一致，Node 侧规划时读取同一文件。",
+  "rules": {
+    "RULE_BOX_A": {
+      "proposed_value": "LZL04",
+      "rule_source": "fixture-rule:box-a-v1"
+    },
+    "RULE_BOX_B": {
+      "proposed_value": "BA99",
+      "rule_source": "fixture-rule:box-b-v1"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "case_id": "intent-013",
+  "note": "回放：越界问题（天气）拒答，不调用工具、不编造。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "我只能处理库存、销量与补货相关的运营问题，无法回答天气。"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "case_id": "intent-012",
+  "note": "回放：补货请求缺 SKU 时追问，绝不自作主张生成采购动作。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "请先告诉我要补货的 SKU 或类目，我会给出建议量与紧急度。"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "case_id": "knowledge-010",
+  "note": "手工夹具（实时库存问题：检索零命中、必须调用 Java 工具取数，协议形状与 DeepSeek Chat Completions 一致）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-knowledge-010-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-001 主动降噪蓝牙耳机当前库存 18 件，档位 low（偏低），快照日期 2026-09-03。"
+          }
+        }
+      ]
+    }
+  ]
+}

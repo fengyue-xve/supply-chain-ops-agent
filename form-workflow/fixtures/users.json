@@ -1,0 +1,22 @@
+{
+  "fixture_version": "1.0.0",
+  "description": "demo 级身份夹具：token → (actor_id, role)。服务端判权。token 值只用于请求头比对，绝不写入审计/Trace/日志；产物中只出现 actor_id。这不是生产认证方案。",
+  "users": {
+    "token-op-1": {
+      "actor_id": "op-1",
+      "role": "operator"
+    },
+    "token-ap-1": {
+      "actor_id": "ap-1",
+      "role": "approver"
+    },
+    "token-agent-1": {
+      "actor_id": "agent-1",
+      "role": "agent"
+    },
+    "token-reader-1": {
+      "actor_id": "reader-1",
+      "role": "reader"
+    }
+  }
+}

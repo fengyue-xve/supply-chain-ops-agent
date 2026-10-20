@@ -1,0 +1,18 @@
+package com.demo.flowagent.domain;
+
+public enum AuditEventType {
+    RUN_CREATED,
+    EVENT_DEDUPLICATED,
+    PLAN_RECORDED,
+    APPROVAL_REQUESTED,
+    APPROVED,
+    REJECTED,
+    APPLY_STARTED,
+    RECORD_WRITTEN,
+    APPLY_SKIPPED,
+    APPLY_FAILED,
+    APPLY_UNCERTAIN,
+    MANUAL_REVIEW_ENTERED,
+    REPLAY_STARTED,
+    REPLAY_FINISHED
+}

@@ -1,0 +1,20 @@
+spring:
+  # 测试隔离铁律：test profile 不 import 任何 .env 文件（含生产 .env.local）。
+  # 测试库密码只允许来自环境变量 SUPPLY_DB_PASSWORD（与 .env.local 同值，由运行命令注入）。
+  datasource:
+    url: ${SUPPLY_TEST_DB_URL:jdbc:mysql://127.0.0.1:3306/supply_agent_test?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai}
+    username: ${SUPPLY_DB_USER:supply_agent}
+    password: ${SUPPLY_DB_PASSWORD:}
+    hikari:
+      connection-timeout: 3000
+
+# W2-D1 JWT(测试专用):secret 固定值仅存在于 test profile,非真实密钥(≥32 字节满足 HS256)。
+# 生产/开发 secret 只从环境变量 JWT_SECRET 读取,见 application.yml。
+app:
+  jwt:
+    secret: supply-agent-test-only-jwt-secret-0123456789abcdef
+    expire-hours: 24
+
+# Testcontainers（配置就绪，未实跑）：本机装好 Docker 后，将 test 数据源切到容器即可：
+#   url: jdbc:mysql://${TC_HOST}:${TC_PORT}/supply_agent_test
+#   （TestcontainersMySQLTestSupport 负责起容器与灌 db/schema.sql + seed.sql，与 TestDbInitializer 同构）

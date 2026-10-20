@@ -1,0 +1,40 @@
+{
+  "case_id": "tool-002",
+  "note": "回放：一次查询内命中 CHG-001、缺失 CHG-999，两部分都要转述。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-002-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"CHG-001\", \"CHG-999\"]}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "CHG-001 当前库存 25 件（ok）；CHG-999 未找到记录，请确认编号。"
+          }
+        }
+      ]
+    }
+  ]
+}

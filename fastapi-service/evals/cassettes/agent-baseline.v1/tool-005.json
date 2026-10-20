@@ -1,0 +1,40 @@
+{
+  "case_id": "tool-005",
+  "note": "回放：days 只支持 7/30，模型对「近 15 天」回退到最近窗口 7 天。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-005-1",
+                "type": "function",
+                "function": {
+                  "name": "query-sales",
+                  "arguments": "{\"sku\": \"AUD-001\", \"days\": 7}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "销量窗口只支持近 7 天或近 30 天，已按近 7 天统计：AUD-001 总销量 5 件，日均 0.71 件。"
+          }
+        }
+      ]
+    }
+  ]
+}

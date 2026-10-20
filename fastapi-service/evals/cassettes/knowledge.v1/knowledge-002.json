@@ -1,0 +1,18 @@
+{
+  "case_id": "knowledge-002",
+  "note": "手工夹具（依据 knowledge/supply-ops.zh.md 补货建议公式段撰写）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "补货建议数量 = 日均销量 × 目标覆盖天数 + 安全库存（固定 20）− 当前库存，结果向上取整；计算值小于等于 0 时建议量按 0 处理。日均销量取自销量查询的窗口口径，当前库存取自库存快照。补货建议只是计算输出，不会创建采购单。"
+          }
+        }
+      ]
+    }
+  ]
+}

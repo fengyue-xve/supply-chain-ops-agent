@@ -1,0 +1,18 @@
+{"case_id": "retrieval-001", "category": "hit", "title": "库存档位可用量阈值（stockLevel）", "query": "availableQty 到 stockLevel 的档位对应关系是什么？", "expected_chunk_ids": ["supply-ops.zh#stock-level-1"], "expect_no_hit": false}
+{"case_id": "retrieval-002", "category": "hit", "title": "库存快照日期字段（snapDate）", "query": "库存快照的 snapDate 是什么意思？", "expected_chunk_ids": ["supply-ops.zh#stock-snapshot-1"], "expect_no_hit": false}
+{"case_id": "retrieval-003", "category": "hit", "title": "销量统计窗口取值（days）", "query": "销量统计窗口 days 支持哪些取值？", "expected_chunk_ids": ["supply-ops.zh#sales-window-1"], "expect_no_hit": false}
+{"case_id": "retrieval-004", "category": "hit", "title": "补货建议数量计算（replenish-formula）", "query": "补货建议数量怎么计算？", "expected_chunk_ids": ["supply-ops.zh#replenish-formula-1"], "expect_no_hit": false}
+{"case_id": "retrieval-005", "category": "hit", "title": "补货紧急度判定（urgency）", "query": "urgency 四档是怎么判断的？", "expected_chunk_ids": ["supply-ops.zh#replenish-urgency-1"], "expect_no_hit": false}
+{"case_id": "retrieval-006", "category": "hit", "title": "目标覆盖天数缺省（targetCoverDays）", "query": "targetCoverDays 缺省值是多少？", "expected_chunk_ids": ["supply-ops.zh#replenish-params-1"], "expect_no_hit": false}
+{"case_id": "retrieval-007", "category": "hit", "title": "缺失 SKU 语义（missingSkus）", "query": "missingSkus 表示什么？", "expected_chunk_ids": ["supply-ops.zh#missing-skus-1"], "expect_no_hit": false}
+{"case_id": "retrieval-008", "category": "hit", "title": "商品类目取值（category）", "query": "category 类目取值有哪些", "expected_chunk_ids": ["supply-ops.zh#categories-1"], "expect_no_hit": false}
+{"case_id": "retrieval-009", "category": "hit", "title": "采购单人工确认（purchase-approval）", "query": "创建采购单会直接生效吗？", "expected_chunk_ids": ["supply-ops.zh#purchase-approval-1"], "expect_no_hit": false}
+{"case_id": "retrieval-010", "category": "hit", "title": "库存异动解释边界（movement-explanation）", "query": "库存异动可以解释为促销活动吗？", "expected_chunk_ids": ["supply-ops.zh#movement-explanation-1"], "expect_no_hit": false}
+{"case_id": "retrieval-011", "category": "hit", "title": "缺输入澄清（clarify-missing-input）", "query": "既没有 SKU 也没有类目时应该做什么？", "expected_chunk_ids": ["supply-ops.zh#clarify-missing-input-1"], "expect_no_hit": false}
+{"case_id": "retrieval-012", "category": "hit", "title": "数据实时性边界（agent-data-boundary，rank2）", "query": "为什么库存数据不是实时流水？", "expected_chunk_ids": ["supply-ops.zh#agent-data-boundary-1"], "expect_no_hit": false, "notes": "探针验证：目标 chunk 命中但排名第 2（RR=0.5），用于覆盖多命中排序场景；top1_hit 不设为期望，仅诊断"}
+{"case_id": "retrieval-013", "category": "multi", "title": "统计窗口与覆盖天数区别（双 chunk 注入）", "query": "days 窗口和 targetCoverDays 有什么区别？", "expected_chunk_ids": ["supply-ops.zh#sales-window-1", "supply-ops.zh#replenish-params-1"], "expect_no_hit": false, "notes": "多期望 chunk 用例：两个 chunk 必须同时出现在注入集（Recall@K=1 的硬性条件）"}
+{"case_id": "retrieval-014", "category": "no-hit", "title": "完全无关查询（天气）", "query": "今天天气怎么样？", "expected_chunk_ids": [], "expect_no_hit": true}
+{"case_id": "retrieval-015", "category": "no-hit", "title": "完全无关查询（写诗）", "query": "帮我写一首诗", "expected_chunk_ids": [], "expect_no_hit": true}
+{"case_id": "retrieval-016", "category": "no-hit", "title": "无信息量问候", "query": "你好", "expected_chunk_ids": [], "expect_no_hit": true}
+{"case_id": "retrieval-017", "category": "boundary", "title": "边界：单 bigram「档位」被准入规则拦截", "query": "档位", "expected_chunk_ids": [], "expect_no_hit": true, "notes": "引擎事实：两字查询产生 1 个 bigram，不满足准入规则（overlap≥2 或 ascii_hits≥1）→ 零命中；如实冻结当前行为，不编造期望"}
+{"case_id": "retrieval-018", "category": "boundary", "title": "边界：单 ASCII token「stockLevel」可命中", "query": "stockLevel", "expected_chunk_ids": ["supply-ops.zh#stock-level-1"], "expect_no_hit": false, "notes": "引擎事实：ASCII 单 token 命中 ascii_hits≥1 准入分支；与 017 共同锁定准入规则的两个分支"}

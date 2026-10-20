@@ -1,0 +1,18 @@
+{
+  "case_id": "knowledge-009",
+  "note": "手工夹具（无命中场景：不注入任何知识，回复不得编造）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "抱歉，我只能协助供应链运营相关的问题（库存、销量、补货建议、采购单状态等），无法提供天气信息。"
+          }
+        }
+      ]
+    }
+  ]
+}

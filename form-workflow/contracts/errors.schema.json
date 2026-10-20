@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://supply-flow.demo/contracts/errors.schema.json",
+  "title": "ErrorResponse",
+  "description": "统一错误响应形状。错误码含义与 HTTP 状态见 README.md 注册表。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["error_code", "message"],
+  "properties": {
+    "error_code": {
+      "$ref": "#/$defs/error_code"
+    },
+    "message": {
+      "type": "string"
+    },
+    "details": {
+      "type": "object",
+      "description": "脱敏细节（如期望状态、当前状态、run_id）。禁止出现 token 与完整工具参数值。"
+    }
+  },
+  "$defs": {
+    "error_code": {
+      "enum": [
+        "BAD_REQUEST",
+        "UNAUTHENTICATED",
+        "FORBIDDEN_ROLE",
+        "NOT_FOUND",
+        "INVALID_TRANSITION",
+        "STALE_EVENT",
+        "VERSION_MISMATCH",
+        "NOT_APPROVED",
+        "PRECONDITION_FAILED",
+        "PLAN_INVALID",
+        "INTERNAL"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "case_id": "knowledge-008",
+  "note": "手工夹具（依据 knowledge/supply-ops.zh.md 缺参追问段撰写）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "如果不知道具体 SKU，可以改按类目查询库存：当前支持 audio（音频）、charging（充电）、accessory（配件）三类，告诉我类目即可；也可以先提供 SKU，我再帮你查库存。"
+          }
+        }
+      ]
+    }
+  ]
+}

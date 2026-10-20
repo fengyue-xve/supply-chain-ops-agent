@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://supply-flow.demo/contracts/record.schema.json",
+  "title": "FormRecordView",
+  "description": "脱敏表单记录视图。GET /api/flow/records/{record_id} 响应（get_form_record 工具）。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "flow_type",
+    "business_version",
+    "sku_code",
+    "mark_rule",
+    "outer_box_mark",
+    "updated_at"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "pattern": "^R-[0-9]{4}$"
+    },
+    "flow_type": {
+      "enum": ["PRELOAD_OUTER_BOX_MARK"]
+    },
+    "business_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sku_code": {
+      "type": "string",
+      "pattern": "^SKU-DEMO-[0-9]{2}$"
+    },
+    "mark_rule": {
+      "type": "string",
+      "pattern": "^RULE_[A-Z0-9_]{2,32}$",
+      "description": "记录携带的规则编码；拟写值由 fixtures/rules.json 中该编码对应的规则决定。"
+    },
+    "outer_box_mark": {
+      "type": ["object", "null"],
+      "required": ["value", "rule_source", "updated_at"],
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "rule_source": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

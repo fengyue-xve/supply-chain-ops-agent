@@ -1,0 +1,48 @@
+{
+  "case_id": "tool-007",
+  "note": "回放：同一轮返回两个并行工具调用（库存 + 销量），两条记录 round 均须为 1。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-007-1",
+                "type": "function",
+                "function": {
+                  "name": "query-stock-level",
+                  "arguments": "{\"skus\": [\"AUD-001\"]}"
+                }
+              },
+              {
+                "id": "call-eval-tool-007-2",
+                "type": "function",
+                "function": {
+                  "name": "query-sales",
+                  "arguments": "{\"sku\": \"AUD-001\", \"days\": 7}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "AUD-001 当前库存 18 件（low）；近 7 天总销量 5 件。"
+          }
+        }
+      ]
+    }
+  ]
+}

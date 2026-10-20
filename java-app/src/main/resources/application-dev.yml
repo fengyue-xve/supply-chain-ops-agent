@@ -1,0 +1,16 @@
+spring:
+  # 本地真实凭据只放在仓库根 .env.local（KEY=VALUE，不入 Git）：
+  #   SUPPLY_DB_PASSWORD / SUPPLY_DB_USER 等
+  # 环境变量同名可覆盖文件值（Spring Boot 属性优先级）。
+  config:
+    import: optional:file:../.env.local
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/supply_agent?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: ${SUPPLY_DB_USER:supply_agent}
+    password: ${SUPPLY_DB_PASSWORD:}
+    hikari:
+      connection-timeout: 3000
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

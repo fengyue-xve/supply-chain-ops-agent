@@ -1,0 +1,18 @@
+{
+  "case_id": "knowledge-007",
+  "note": "手工夹具（依据 knowledge/supply-ops.zh.md 商品类目段撰写）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "当前支持三个商品类目：audio（音频）、charging（充电）、accessory（配件）。库存、销量、补货查询都可以按类目或按 SKU 查询，二者二选一；类目取值超出这三类时会返回空结果，需要核对类目。"
+          }
+        }
+      ]
+    }
+  ]
+}

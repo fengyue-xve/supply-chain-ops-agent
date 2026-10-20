@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: ${SUPPLY_DB_URL:jdbc:mysql://127.0.0.1:3306/supply_agent?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai}
+    username: ${SUPPLY_DB_USER:supply_agent}
+    password: ${SUPPLY_DB_PASSWORD:demo-only-db}
+    hikari:
+      connection-timeout: 3000
+server:
+  address: 127.0.0.1
+  port: ${DEMO_API_PORT:18180}
+app:
+  jwt:
+    secret: ${JWT_SECRET:public-local-demo-only-signing-key-0123456789abcdef}
+logging:
+  level:
+    com.demo.supplyagent: info

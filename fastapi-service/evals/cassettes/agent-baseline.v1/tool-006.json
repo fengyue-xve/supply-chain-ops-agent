@@ -1,0 +1,40 @@
+{
+  "case_id": "tool-006",
+  "note": "回放：targetCoverDays=30 覆盖默认 14。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-tool-006-1",
+                "type": "function",
+                "function": {
+                  "name": "suggest-replenish",
+                  "arguments": "{\"skus\": [\"ACC-001\"], \"days\": 7, \"targetCoverDays\": 30}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "ACC-001 硅胶手机壳(透明)按 30 天覆盖建议补货 60 件（当前库存 5 件，日均 1.5 件）。"
+          }
+        }
+      ]
+    }
+  ]
+}

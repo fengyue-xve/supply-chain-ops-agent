@@ -1,0 +1,62 @@
+{
+  "fixture_version": "1.0.0",
+  "description": "脱敏流转事件夹具。submit 顺序由场景决定（见 fixtures/README.md）。",
+  "events": [
+    {
+      "event_id": "evt-001",
+      "source_record_id": "R-1001",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 3,
+      "submitted_by": "op-1",
+      "note": "happy path 01"
+    },
+    {
+      "event_id": "evt-002",
+      "source_record_id": "R-1002",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 1,
+      "submitted_by": "op-1",
+      "note": "happy path 02"
+    },
+    {
+      "event_id": "evt-003",
+      "source_record_id": "R-1003",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 2,
+      "submitted_by": "op-1",
+      "note": "同值回写：记录已有 LZL04"
+    },
+    {
+      "event_id": "evt-101",
+      "source_record_id": "R-9002",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 4,
+      "submitted_by": "op-1",
+      "note": "写入失败一次：首跑 MANUAL_REVIEW，replay 成功"
+    },
+    {
+      "event_id": "evt-102",
+      "source_record_id": "R-9003",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 5,
+      "submitted_by": "op-1",
+      "note": "持续写入失败：replay 仍失败"
+    },
+    {
+      "event_id": "evt-103",
+      "source_record_id": "R-9004",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 6,
+      "submitted_by": "op-1",
+      "note": "结果不确定：可能已写入，replay 需按幂等键回查对账"
+    },
+    {
+      "event_id": "evt-201",
+      "source_record_id": "R-8001",
+      "flow_type": "PRELOAD_OUTER_BOX_MARK",
+      "business_version": 6,
+      "submitted_by": "op-1",
+      "note": "旧版本事件：记录当前版本为 7，应被 STALE_EVENT 拒绝"
+    }
+  ]
+}

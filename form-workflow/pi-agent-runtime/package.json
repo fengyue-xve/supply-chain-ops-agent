@@ -1,0 +1,25 @@
+{
+  "name": "pi-agent-runtime",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Portable Pi SDK adapter for the synthetic outer-box-mark verification demo. Java owns approval, business rules and writes; the supplied model provider is Faux (offline scripted responses).",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "smoke": "tsx --tsconfig tsconfig.json src/smoke.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "tsx --tsconfig tsconfig.json --test test/*.test.ts",
+    "demo": "tsx --tsconfig tsconfig.json src/cli.ts"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "tsx": "4.22.1",
+    "typescript": "5.9.3"
+  }
+}

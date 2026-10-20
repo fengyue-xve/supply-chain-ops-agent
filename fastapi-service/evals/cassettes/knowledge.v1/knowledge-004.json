@@ -1,0 +1,18 @@
+{
+  "case_id": "knowledge-004",
+  "note": "手工夹具（依据 knowledge/supply-ops.zh.md missingSkus 语义段撰写）：仅验证协议与引用契约，groundedness 需真实模型输出后人工复核。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "missingSkus 列出的是在商品主档或快照中未找到的 SKU：它们不会出现在 items 中，而是单独列入 missingSkus；items 与 missingSkus 可以同时非空，表示部分命中。重复请求同一个 SKU 只计一次。按类目查询没有数据时返回空结果，不是错误。"
+          }
+        }
+      ]
+    }
+  ]
+}

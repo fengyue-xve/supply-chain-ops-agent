@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://supply-flow.demo/contracts/plan.schema.json",
+  "title": "TransitionPlan",
+  "description": "结构化流转计划。由 Agent 生成（plan_transition 工具请求体），Java 校验后存入 run。Java 校验强于本 Schema：proposed_value 必须与 fixtures/rules.json 中该记录 mark_rule 的规则值一致。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plan_version",
+    "source_record_id",
+    "flow_type",
+    "business_version",
+    "target_field",
+    "proposed_value",
+    "rule_source",
+    "preconditions",
+    "idempotency_key",
+    "risk",
+    "requires_human_approval"
+  ],
+  "properties": {
+    "plan_version": {
+      "const": "1.0"
+    },
+    "source_record_id": {
+      "type": "string",
+      "pattern": "^R-[0-9]{4}$"
+    },
+    "flow_type": {
+      "enum": ["PRELOAD_OUTER_BOX_MARK"]
+    },
+    "business_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "target_field": {
+      "const": "outer_box_mark"
+    },
+    "proposed_value": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{2,12}$",
+      "description": "仅允许脱敏示例值（如 LZL04 / BA99），服务端按规则表强校验。"
+    },
+    "rule_source": {
+      "type": "string",
+      "pattern": "^fixture-rule:[a-z0-9-]{2,64}$",
+      "description": "拟写值的规则来源标识，与 rules.json 中该规则声明一致。"
+    },
+    "preconditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/precondition"
+      }
+    },
+    "idempotency_key": {
+      "type": "string",
+      "pattern": "^FLOW_IDK_[0-9a-f]{16}$"
+    },
+    "risk": {
+      "enum": ["LOW", "MEDIUM", "HIGH"]
+    },
+    "requires_human_approval": {
+      "type": "boolean",
+      "description": "v1 的 PRELOAD_OUTER_BOX_MARK 必须为 true（Java 强校验）。"
+    }
+  },
+  "$defs": {
+    "precondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "record_exists",
+            "business_version_matches",
+            "mark_rule_known",
+            "target_field_differs",
+            "idempotency_key_absent"
+          ]
+        },
+        "detail": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

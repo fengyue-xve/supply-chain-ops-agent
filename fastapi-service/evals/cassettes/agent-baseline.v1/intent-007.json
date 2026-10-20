@@ -1,0 +1,40 @@
+{
+  "case_id": "intent-007",
+  "note": "回放：补货建议查询，仅出建议不产生采购动作。",
+  "responses": [
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "tool_calls",
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call-eval-intent-007-1",
+                "type": "function",
+                "function": {
+                  "name": "suggest-replenish",
+                  "arguments": "{\"skus\": [\"ACC-001\"], \"days\": 7}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "ACC-001 硅胶手机壳(透明)当前库存 5 件、日均 1.5 件，按 14 天覆盖建议补货 36 件，紧急度 urgent。"
+          }
+        }
+      ]
+    }
+  ]
+}
