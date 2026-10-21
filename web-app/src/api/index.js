@@ -11,7 +11,12 @@ export const querySales = (payload) => http.post('/agent/tools/query-sales', pay
 
 export const suggestReplenish = (payload) => http.post('/agent/tools/suggest-replenish', payload)
 
-export const chat = (payload) => http.post('/chat', payload)
+export const chat = (payload, requestId) => requestId
+  ? http.post('/chat', payload, { headers: { 'X-Request-Id': requestId } })
+  : http.post('/chat', payload)
+
+export const agentTrace = (id) => http.get('/agent/runs/' + encodeURIComponent(id))
+export const cancelAgentRun = (id) => http.post('/agent/runs/' + encodeURIComponent(id) + '/cancel', {})
 
 // W4-1 会话历史:仅本人会话可读(后端 403 为最终边界)
 export const chatHistory = (payload) => http.post('/chat/history', payload)

@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import { chat, chatHistory } from '../api'
 import { readAuth } from '../utils/auth'
 import { clearConversationId, readConversationId, saveConversationId } from '../utils/conversation'
+import AgentTracePanel from './AgentTracePanel.vue'
 
 // conversation_id:首轮由服务端返回后回填并按用户持久化(sessionStorage);成功取响应体,
 // 失败(502/504)取 Java 回写的 X-Conversation-Id 响应头;已有本地 id 时一律不覆盖。
@@ -14,6 +15,8 @@ const error = ref('')
 const conversationId = ref(readConversationId(username))
 const messages = ref([])
 const restoring = ref(false)
+const traceRequestId = ref('')
+const cancelled = ref(false)
 let restoreGeneration = 0
 // 会话代次:新建会话 +1;send 开始时记录,请求返回后若代次已变则丢弃响应,不串写新会话。
 let sessionGeneration = 0
@@ -88,6 +91,8 @@ function dropStoredConversation() {
 }
 
 function startNewSession() {
+  traceRequestId.value = ''
+  cancelled.value = false
   sessionGeneration += 1
   restoreGeneration += 1
   restoring.value = false
@@ -124,11 +129,13 @@ async function send() {
   // 不回填 id、不追气泡、finally 也不清新会话的 sending。
   const generation = sessionGeneration
   sending.value = true
+  cancelled.value = false
+  traceRequestId.value = globalThis.crypto?.randomUUID?.() || `ui-${Date.now()}`
   error.value = ''
   messages.value.push({ role: 'user', text })
   input.value = ''
   try {
-    const response = await chat({ conversation_id: conversationId.value ?? undefined, message: text })
+    const response = await chat({ conversation_id: conversationId.value ?? undefined, message: text }, traceRequestId.value)
     if (generation !== sessionGeneration) return
     const data = response.data.data || {}
     adoptServerConversationId(data.conversation_id, response.headers)
@@ -147,7 +154,7 @@ async function send() {
     adoptServerConversationId('', e.response?.headers)
     messages.value.push({
       role: 'agent',
-      text: e.response ? (e.message || '请求失败') : '无法连接服务，请稍后重试',
+      text: cancelled.value ? '已请求取消本轮Agent运行，请核对轨迹停因。' : e.response ? (e.message || '请求失败') : '无法连接服务，请稍后重试',
       requestId: headerValue(e.response?.headers, 'x-request-id'),
       failed: true,
     })
@@ -158,6 +165,7 @@ async function send() {
 </script>
 
 <template>
+  <div class="agent-chat-layout">
   <div class="chat-card">
     <div class="chat-head">
       <div class="chat-title"><span class="agent-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3Z"/></svg></span><div><span>Agent 对话</span><small>围绕业务事实，辅助调查</small></div></div>
@@ -210,6 +218,8 @@ async function send() {
       <button type="submit" :disabled="sending || restoring" data-test="chat-send">{{ sending ? '发送中…' : '发送' }}</button>
     </form>
     <div class="chat-input-note">Enter 发送 · Shift + Enter 换行</div>
+  </div>
+  <AgentTracePanel :request-id="traceRequestId" :running="sending" @cancelled="cancelled = true" />
   </div>
 </template>
 

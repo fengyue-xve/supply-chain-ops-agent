@@ -10,6 +10,7 @@ from fastapi import APIRouter, Request
 from app.errors import ApiError
 from app.ids import new_request_id
 from app.schemas import ApiResponse, ChatRequest
+from app.agent.live_trace import trace_identity
 
 router = APIRouter()
 
@@ -43,13 +44,14 @@ async def chat(body: ChatRequest, request: Request) -> ApiResponse:
     if not authorization:
         raise ApiError(401, _AUTH_MISSING_MESSAGE)
     request_id = request.scope.get("request_id") or new_request_id()
-    data = await request.app.state.orchestrator.chat(
-        message=body.message,
-        conversation_id=body.conversation_id,
-        request_id=request_id,
-        authorization=authorization,
-        history=body.history,
-    )
+    with trace_identity(authorization):
+        data = await request.app.state.orchestrator.chat(
+            message=body.message,
+            conversation_id=body.conversation_id,
+            request_id=request_id,
+            authorization=authorization,
+            history=body.history,
+        )
     payload = data.model_dump()
     if not data.sources:
         # 无命中时完全省略 sources 键（只做单字段裁剪，不启用全局 exclude_none）

@@ -19,6 +19,7 @@ def main():
         ('pi-types', 'form-workflow/pi-agent-runtime', [executable('npm'), 'run', 'typecheck']),
         ('pi-tests', 'form-workflow/pi-agent-runtime', [executable('npm'), 'test']),
         ('current-business', 'fastapi-service', [sys.executable, '-m', 'evals.run', '--suite', 'current-business.v1']),
+        ('hybrid-ablation', 'fastapi-service', [sys.executable, '-m', 'evals.hybrid_ablation']),
     ]
     results=[]
     for name, cwd, command in steps:

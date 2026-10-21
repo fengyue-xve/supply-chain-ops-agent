@@ -1,0 +1,2498 @@
+{
+  "generated_at": "2026-10-21T14:23:32.686469+00:00",
+  "scope": "current corpus; 3 chunks and 1500 character prompt budget",
+  "embedding": {
+    "model": "domain-feature-hash-v1",
+    "trained_model": false,
+    "dimensions": 512,
+    "rrf_k": 60
+  },
+  "limitations": [
+    "Both sets have been inspected; rephrasing is a regression audit, not an unseen holdout.",
+    "Local deterministic feature vectors are not a trained semantic embedding model.",
+    "Recall measures labeled retrieval, not LLM answer quality. Failures and noise remain visible."
+  ],
+  "corpus_sha256": {
+    "supply-ops.zh.md": "9a5ae7ef0f453658d5a86e6771a3cbb630a4541c3a6c44368639e184caec922c"
+  },
+  "datasets": {
+    "development_30": {
+      "sha256": "390bc4ec1bc54efb83e6544527935d86b3f40a4120fea9b4b731a9366a8153a9",
+      "results": {
+        "Lexical v1": {
+          "strict_pass": 22,
+          "total": 30,
+          "recall_at_3": 0.9285714285714286,
+          "all_expected_covered": 23,
+          "positive_count": 25,
+          "forbidden_injections": 6,
+          "clean_negatives": 5,
+          "cases": [
+            {
+              "case_id": "current-business-001",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-002",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-003",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-004",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-005",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-006",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-007",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-008",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-009",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-010",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-011",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1",
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-012",
+              "selected_ids": [],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 0,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-013",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#missing-skus-1",
+                "supply-ops.zh#categories-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-014",
+              "selected_ids": [
+                "supply-ops.zh#stock-snapshot-1",
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#movement-explanation-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#movement-explanation-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-015",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-016",
+              "selected_ids": [
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "expected": [
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-017",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-018",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-019",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-020",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-021",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-022",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#agent-data-boundary-1",
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-023",
+              "selected_ids": [],
+              "expected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "covered": 0,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-024",
+              "selected_ids": [
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-025",
+              "selected_ids": [
+                "supply-ops.zh#categories-1",
+                "supply-ops.zh#clarify-missing-input-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#categories-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-026",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-027",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-028",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-029",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-030",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            }
+          ]
+        },
+        "Lexical v2": {
+          "strict_pass": 23,
+          "total": 30,
+          "recall_at_3": 0.9642857142857143,
+          "all_expected_covered": 24,
+          "positive_count": 25,
+          "forbidden_injections": 8,
+          "clean_negatives": 5,
+          "cases": [
+            {
+              "case_id": "current-business-001",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#stock-level-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#stock-level-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-002",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-003",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-004",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-005",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#agent-data-boundary-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-006",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-007",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-008",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-009",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-010",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-011",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1",
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-012",
+              "selected_ids": [],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 0,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-013",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-014",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#stock-snapshot-1",
+                "supply-ops.zh#movement-explanation-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#movement-explanation-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-015",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-016",
+              "selected_ids": [
+                "supply-ops.zh#stock-snapshot-1",
+                "supply-ops.zh#agent-data-boundary-1",
+                "supply-ops.zh#stock-level-1"
+              ],
+              "expected": [
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-017",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-018",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-019",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-020",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-021",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-022",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#purchase-approval-1",
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-023",
+              "selected_ids": [
+                "supply-ops.zh#stock-snapshot-1",
+                "supply-ops.zh#missing-skus-1",
+                "supply-ops.zh#movement-explanation-1"
+              ],
+              "expected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#movement-explanation-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-024",
+              "selected_ids": [
+                "supply-ops.zh#clarify-missing-input-1",
+                "supply-ops.zh#categories-1"
+              ],
+              "expected": [
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-025",
+              "selected_ids": [
+                "supply-ops.zh#categories-1",
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#categories-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-026",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-027",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-028",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-029",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-030",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            }
+          ]
+        },
+        "Lexical v3 (10-21 baseline)": {
+          "strict_pass": 30,
+          "total": 30,
+          "recall_at_3": 1.0,
+          "all_expected_covered": 25,
+          "positive_count": 25,
+          "forbidden_injections": 0,
+          "clean_negatives": 5,
+          "cases": [
+            {
+              "case_id": "current-business-001",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-002",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-003",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-004",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-005",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-006",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-007",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-008",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-009",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-010",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-011",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1",
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-012",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-013",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#missing-skus-1",
+                "supply-ops.zh#categories-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-014",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-015",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-016",
+              "selected_ids": [
+                "supply-ops.zh#stock-snapshot-1",
+                "supply-ops.zh#stock-level-1",
+                "supply-ops.zh#movement-explanation-1"
+              ],
+              "expected": [
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-017",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-018",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-019",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-020",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-021",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-022",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-023",
+              "selected_ids": [
+                "supply-ops.zh#missing-skus-1",
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-024",
+              "selected_ids": [
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-025",
+              "selected_ids": [
+                "supply-ops.zh#categories-1",
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#categories-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-026",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-027",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-028",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-029",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-030",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            }
+          ]
+        },
+        "Hybrid RAG": {
+          "strict_pass": 27,
+          "total": 30,
+          "recall_at_3": 0.9285714285714286,
+          "all_expected_covered": 23,
+          "positive_count": 25,
+          "forbidden_injections": 2,
+          "clean_negatives": 5,
+          "cases": [
+            {
+              "case_id": "current-business-001",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-002",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-003",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-004",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-005",
+              "selected_ids": [
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 0,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-006",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-007",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-008",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-009",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-010",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-011",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-012",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-013",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-014",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-015",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-016",
+              "selected_ids": [
+                "supply-ops.zh#stock-level-1",
+                "supply-ops.zh#stock-snapshot-1",
+                "supply-ops.zh#agent-data-boundary-1"
+              ],
+              "expected": [
+                "supply-ops.zh#stock-snapshot-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-017",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-018",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1",
+                "supply-ops.zh#movement-explanation-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-019",
+              "selected_ids": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "expected": [
+                "supply-ops.zh#sales-window-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-020",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-021",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-022",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1",
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-023",
+              "selected_ids": [
+                "supply-ops.zh#missing-skus-1",
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-024",
+              "selected_ids": [
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "expected": [
+                "supply-ops.zh#clarify-missing-input-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-025",
+              "selected_ids": [
+                "supply-ops.zh#categories-1"
+              ],
+              "expected": [
+                "supply-ops.zh#categories-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-026",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-027",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-028",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-029",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-030",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            }
+          ]
+        }
+      }
+    },
+    "seen_rephrasing_12": {
+      "sha256": "2bdb1e4a3eb71e78892cb054b75cbd4e27b72c6a538cbbfee425e1a669ffe56a",
+      "results": {
+        "Lexical v1": {
+          "strict_pass": 10,
+          "total": 12,
+          "recall_at_3": 0.9090909090909091,
+          "all_expected_covered": 9,
+          "positive_count": 10,
+          "forbidden_injections": 1,
+          "clean_negatives": 2,
+          "cases": [
+            {
+              "case_id": "current-business-holdout-001",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-002",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-003",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-004",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-holdout-005",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-holdout-006",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-007",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-008",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-009",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-010",
+              "selected_ids": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "expected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-011",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-012",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            }
+          ]
+        },
+        "Lexical v2": {
+          "strict_pass": 10,
+          "total": 12,
+          "recall_at_3": 0.9090909090909091,
+          "all_expected_covered": 9,
+          "positive_count": 10,
+          "forbidden_injections": 1,
+          "clean_negatives": 2,
+          "cases": [
+            {
+              "case_id": "current-business-holdout-001",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-002",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-003",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-004",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-holdout-005",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-holdout-006",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-007",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-008",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-009",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-010",
+              "selected_ids": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "expected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-011",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-012",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            }
+          ]
+        },
+        "Lexical v3 (10-21 baseline)": {
+          "strict_pass": 10,
+          "total": 12,
+          "recall_at_3": 0.9090909090909091,
+          "all_expected_covered": 9,
+          "positive_count": 10,
+          "forbidden_injections": 1,
+          "clean_negatives": 2,
+          "cases": [
+            {
+              "case_id": "current-business-holdout-001",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-002",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-003",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-004",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-holdout-005",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1",
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-holdout-006",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-007",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-008",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-009",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-010",
+              "selected_ids": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "expected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-011",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-012",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            }
+          ]
+        },
+        "Hybrid RAG": {
+          "strict_pass": 11,
+          "total": 12,
+          "recall_at_3": 1.0,
+          "all_expected_covered": 10,
+          "positive_count": 10,
+          "forbidden_injections": 1,
+          "clean_negatives": 2,
+          "cases": [
+            {
+              "case_id": "current-business-holdout-001",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-002",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-003",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-004",
+              "selected_ids": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-formula-1",
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 2,
+              "expected_count": 2,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-005",
+              "selected_ids": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-006",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-007",
+              "selected_ids": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "expected": [
+                "supply-ops.zh#replenish-params-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-008",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1",
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [
+                "supply-ops.zh#replenish-urgency-1"
+              ],
+              "negative": false,
+              "strict_pass": false
+            },
+            {
+              "case_id": "current-business-holdout-009",
+              "selected_ids": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "expected": [
+                "supply-ops.zh#purchase-approval-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-010",
+              "selected_ids": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "expected": [
+                "supply-ops.zh#missing-skus-1"
+              ],
+              "covered": 1,
+              "expected_count": 1,
+              "forbidden_injected": [],
+              "negative": false,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-011",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            },
+            {
+              "case_id": "current-business-holdout-012",
+              "selected_ids": [],
+              "expected": [],
+              "covered": 0,
+              "expected_count": 0,
+              "forbidden_injected": [],
+              "negative": true,
+              "strict_pass": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

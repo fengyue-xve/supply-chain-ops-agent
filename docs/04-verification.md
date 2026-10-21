@@ -1,3 +1,5 @@
+> 当前升级结果：Java280、表单32、Python407通过/3跳过、Vue151、Pi19；真实HTTP27、Pi73及原页面保持通过。新增MCP/trace/reset与Hybrid消融见 [升级说明](08-agent-upgrade.md)。下文为此前基线记录，改写10/12是旧Lexical v3结果。
+
 # 验证范围与已知局限
 
 验证使用本地MySQL8.0、Java21、Node、Python虚拟环境和合成数据；最终结果以仓库CI及本地验证摘要为准。脚本将测试日志保留在 `artifacts/verify/`，不纳入源代码提交。

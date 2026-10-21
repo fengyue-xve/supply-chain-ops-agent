@@ -43,6 +43,7 @@ class RunContext:
     model_tools_count: int = 0
     schema_source: str | None = None
     sources_ids: list[str] = field(default_factory=list)
+    context_layers: list[dict] = field(default_factory=list)
     # 可注入时钟：生产用 time.monotonic，测试注入假时钟做确定性预算断言。
     clock: Callable[[], float] = time.monotonic
     run_key: str = field(default_factory=lambda: uuid.uuid4().hex)

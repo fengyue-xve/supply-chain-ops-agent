@@ -38,6 +38,8 @@ def environment():
     env.setdefault("SUPPLY_DB_URL", f"jdbc:mysql://{host}:{port}/{db}{suffix}")
     env.setdefault("SUPPLY_TEST_DB_URL", f"jdbc:mysql://{host}:{port}/supply_agent_test{suffix}")
     env.setdefault("AGENT_PROVIDER", "demo")
+    env.setdefault("FLOW_DEMO_RESET_ENABLED", "true")
+    env.setdefault("FLOW_DEMO_RESET_KEY", "synthetic-demo-reset-only")
     env["JAVA_BASE_URL"] = "http://127.0.0.1:18180"
     env["JAVA_API_URL"] = env["JAVA_BASE_URL"]
     env["AGENT_GATEWAY_BASE_URL"] = "http://127.0.0.1:18181"
@@ -71,7 +73,7 @@ def init_db():
     if not mysql:
         raise RuntimeError("mysql client is required for init-db; see docs/02-run-demo.md")
     env["MYSQL_PWD"] = env["SUPPLY_DB_PASSWORD"]
-    for name in ["schema.sql", "seed.sql", "05_w4_pending_po_lookup.sql", "demo_case.sql"]:
+    for name in ["schema.sql", "seed.sql", "05_w4_pending_po_lookup.sql", "demo_case.sql", "06_demo_reset_guard.sql"]:
         text = (ROOT / "db" / name).read_text(encoding="utf-8")
         text = text.replace("USE supply_agent;", "USE " + env.get("SUPPLY_DB_NAME", "supply_agent") + ";")
         if not text.lstrip().startswith("USE "):
@@ -94,6 +96,20 @@ def fingerprint(pid):
         return subprocess.check_output(["ps", "-p", str(pid), "-o", "lstart="], text=True).strip()
     except (OSError, subprocess.CalledProcessError):
         return None
+
+
+def enable_reset():
+    """Explicit opt-in marker; this command never clears business data."""
+    env = environment()
+    if env.get("SUPPLY_DB_HOST", "127.0.0.1") not in {"127.0.0.1", "localhost"} or env.get("SUPPLY_DB_NAME", "supply_agent") != "supply_agent":
+        raise RuntimeError("Reset opt-in requires an isolated loopback supply_agent database")
+    mysql = shutil.which("mysql")
+    if not mysql:
+        raise RuntimeError("Add the local MySQL bin directory to PATH first")
+    env["MYSQL_PWD"] = env["SUPPLY_DB_PASSWORD"]
+    sql = "USE supply_agent;\n" + (ROOT / "db/06_demo_reset_guard.sql").read_text(encoding="utf-8")
+    subprocess.run([mysql, "--protocol=tcp", "--default-character-set=utf8mb4", "-h", env.get("SUPPLY_DB_HOST", "127.0.0.1"), "-P", env.get("SUPPLY_DB_PORT", "3306"), "-u", env["SUPPLY_DB_USER"]], input=sql.encode("utf-8"), env=env, check=True)
+    print("Synthetic reset marker enabled; no business rows cleared.")
 
 
 def stop():
@@ -171,7 +187,7 @@ def start():
 
 if __name__ == "__main__":
     command = sys.argv[1] if len(sys.argv) > 1 else "help"
-    actions = {"prepare": prepare, "init-db": init_db, "start": start, "stop": stop}
+    actions = {"prepare": prepare, "init-db": init_db, "enable-reset": enable_reset, "start": start, "stop": stop}
     if command not in actions:
-        raise SystemExit("Usage: python scripts/demo.py prepare|init-db|start|stop")
+        raise SystemExit("Usage: python scripts/demo.py prepare|init-db|enable-reset|start|stop")
     actions[command]()

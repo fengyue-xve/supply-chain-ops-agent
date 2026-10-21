@@ -15,7 +15,10 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from app.api.chat import router as chat_router
-from app.agent.events import build_event_sink
+from app.api.mcp import router as mcp_router
+from app.api.traces import router as traces_router
+from app.agent.live_trace import LiveTraceSink
+from app.agent.events import build_event_sink, MultiSink
 from app.agent.orchestrator import AgentOrchestrator
 from app.config import Settings, load_settings
 from app.errors import ApiError
@@ -25,6 +28,7 @@ from app.models.deepseek import DeepSeekProvider
 from app.models.fake import FakeModelProvider
 from app.rag.retriever import KnowledgeRetriever
 from app.rag.retriever_v3 import KnowledgeRetrieverV3
+from app.rag.hybrid import HybridKnowledgeRetriever
 from app.schemas import ApiResponse
 from app.tools.java_client import JavaToolClient
 from app.tools.schema_loader import ToolSchemaLoader
@@ -61,7 +65,10 @@ def create_app(
     loader = schema_loader or ToolSchemaLoader(
         client, settings.tools_schema_path, settings.schema_cache_ttl_seconds
     )
-    retriever = retriever or KnowledgeRetrieverV3(settings.knowledge_dir)
+    retrieval_mode = os.getenv("RAG_RETRIEVER", "hybrid")
+    if retrieval_mode not in {"hybrid", "lexical-v3"}:
+        raise ValueError("RAG_RETRIEVER must be hybrid or lexical-v3")
+    retriever = retriever or (HybridKnowledgeRetriever(settings.knowledge_dir) if retrieval_mode == "hybrid" else KnowledgeRetrieverV3(settings.knowledge_dir))
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -79,7 +86,8 @@ def create_app(
     )
     app.add_middleware(RequestIdMiddleware)
 
-    event_sink = build_event_sink(trace_file or settings.agent_trace_file)
+    app.state.live_traces = LiveTraceSink()
+    event_sink = MultiSink(build_event_sink(trace_file or settings.agent_trace_file), app.state.live_traces)
 
     app.state.settings = settings
     app.state.java_client = client
@@ -98,6 +106,8 @@ def create_app(
     )
 
     app.include_router(chat_router)
+    app.include_router(mcp_router)
+    app.include_router(traces_router)
     _register_error_handlers(app)
     return app
 

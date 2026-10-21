@@ -1,0 +1,7 @@
+{
+  "name": "supply-chain-mcp-protocol-validation",
+  "private": true,
+  "type": "module",
+  "scripts": { "smoke": "node smoke.mjs" },
+  "dependencies": { "@modelcontextprotocol/sdk": "1.30.0" }
+}

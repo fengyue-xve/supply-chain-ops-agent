@@ -31,7 +31,9 @@
       "type": "string"
     },
     "flow_type": {
-      "enum": ["PRELOAD_OUTER_BOX_MARK"]
+      "enum": [
+        "PRELOAD_OUTER_BOX_MARK"
+      ]
     },
     "business_version": {
       "type": "integer",
@@ -48,15 +50,28 @@
       "$ref": "#/$defs/apply_result"
     },
     "plan": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "plan.schema.json 的 TransitionPlan；未生成计划时为 null。"
     },
     "approval": {
-      "type": ["object", "null"],
-      "required": ["decision", "actor_id", "decided_at"],
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "decision",
+        "actor_id",
+        "decided_at"
+      ],
       "properties": {
         "decision": {
-          "enum": ["APPROVED", "REJECTED"]
+          "enum": [
+            "APPROVED",
+            "REJECTED"
+          ]
         },
         "actor_id": {
           "type": "string"
@@ -66,12 +81,18 @@
           "format": "date-time"
         },
         "note": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "failure_reason": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "write_count": {
       "type": "integer",
@@ -113,12 +134,21 @@
       ]
     },
     "apply_result": {
-      "enum": ["NONE", "APPLIED", "SKIPPED"]
+      "enum": [
+        "NONE",
+        "APPLIED",
+        "SKIPPED"
+      ]
     },
     "audit_entry": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["seq", "ts", "event_type", "actor_id"],
+      "required": [
+        "seq",
+        "ts",
+        "event_type",
+        "actor_id"
+      ],
       "properties": {
         "seq": {
           "type": "integer",
@@ -143,7 +173,8 @@
             "APPLY_UNCERTAIN",
             "MANUAL_REVIEW_ENTERED",
             "REPLAY_STARTED",
-            "REPLAY_FINISHED"
+            "REPLAY_FINISHED",
+            "DEMO_BASELINE_RESET"
           ]
         },
         "actor_id": {

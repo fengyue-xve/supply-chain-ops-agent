@@ -10,11 +10,27 @@ import PoPanel from '../components/PoPanel.vue'
 import AuditPanel from '../components/AuditPanel.vue'
 import ChatPanel from '../components/ChatPanel.vue'
 import FormWorkflowPanel from '../components/FormWorkflowPanel.vue'
+import { http } from '../api/http'
 
 const router = useRouter()
 const auth = readAuth()
 const purchaseRevision = ref(0)
 const purchaseStatus = ref('')
+const resetEpoch = ref(0)
+const resetting = ref(false)
+async function resetDemo() {
+  if (!window.confirm('恢复本机合成运营与表单基线，并清除本用户浏览器中的旧采购恢复请求；审计保留。继续？')) return
+  resetting.value = true
+  try {
+    const response = await http.post('/demo/reset', { confirmed: true })
+    localStorage.removeItem('sca_purchase_attempt:' + auth.username)
+    sessionStorage.removeItem('sca_conv:' + auth.username)
+    purchaseStatus.value = response.data.data.message
+    resetEpoch.value++
+    purchaseRevision.value++
+  } catch (error) { purchaseStatus.value = error.message || '重置结果未确认，请核对业务状态。' }
+  finally { resetting.value = false }
+}
 function purchaseChanged(message) {
   purchaseRevision.value++
   if (typeof message === 'string') purchaseStatus.value = message
@@ -51,6 +67,7 @@ function logout() {
       <header class="topbar">
         <div class="breadcrumb"><span>工作空间</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 4 4 4-4 4"/></svg><strong>运营工作台</strong></div>
         <div class="user-info"><span class="user-avatar" aria-hidden="true">{{ (auth?.username || 'U').slice(0, 1).toUpperCase() }}</span><span class="user-name">{{ auth?.username || '' }}</span><span class="role-badge" :class="auth?.role" data-test="role-badge">{{ auth?.role === 'admin' ? '管理员' : '查看者' }}</span></div>
+        <button v-if="auth?.role === 'admin'" class="logout" data-test="reset-demo" :disabled="resetting" @click="resetDemo">重置演示数据</button>
         <button class="logout" data-test="logout" @click="logout">退出登录</button>
       </header>
 
@@ -63,7 +80,7 @@ function logout() {
         </div>
         <p v-if="purchaseStatus" class="purchase-status" role="status" data-test="purchase-status">{{ purchaseStatus }}</p>
 
-        <main class="layout">
+        <main :key="resetEpoch" class="layout">
           <section class="col-left">
             <section id="operating-data" class="section-group">
               <div class="section-heading"><span class="section-number">01</span><div><h2>经营数据核对</h2><p>先确认库存快照与销量窗口，再进入补货测算。</p></div></div>
@@ -157,4 +174,10 @@ h1 { color: #1b2a40; font-size: 25px; line-height: 1.4; letter-spacing: -.5px; m
 @media(max-width: 1300px) { .workspace-content { padding: 24px 24px 0; } .topbar { padding-left: 24px; padding-right: 24px; } .layout { grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; } .query-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
 @media(max-width: 1050px) { .sidebar { width: 204px; padding-left: 12px; padding-right: 12px; } .workspace-body { margin-left: 204px; } .layout { grid-template-columns: minmax(0, 1fr); } .query-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .col-right { position: static; } .flow-tag { display: none; } }
 @media(max-width: 760px) { .sidebar { position: static; width: 100%; padding: 16px 18px 0; overflow: visible; } .brand { padding: 0; } .brand-mark { width: 31px; height: 33px; } .brand strong { font-size: 15px; } .brand small { font-size: 11px; } .nav-label, .sidebar-note, .sidebar-foot { display: none; } .side-nav { flex-direction: row; gap: 4px; overflow-x: auto; margin-top: 16px; padding-bottom: 10px; } .side-nav a { white-space: nowrap; min-height: 34px; padding: 7px 10px; font-size: 11px; gap: 6px; } .side-nav svg { width: 15px; height: 15px; } .nav-dot { display: none; } .workspace-body { margin-left: 0; } .topbar { min-height: 58px; padding: 12px 18px; gap: 10px; } .user-info { gap: 6px; } .user-avatar { display: none; } .breadcrumb { font-size: 11px; gap: 6px; } .breadcrumb span { display: none; } .breadcrumb svg { display: none; } .logout { font-size: 11px; padding: 5px 8px; } .workspace-content { padding: 22px 16px 0; } .page-heading { align-items: flex-start; margin-bottom: 18px; } h1 { font-size: 22px; } .page-heading p { max-width: 215px; line-height: 1.8; font-size: 11px; } .environment-label { padding: 5px 6px; font-size: 11px; margin-top: 20px; } .business-flow { padding: 13px; margin-bottom: 22px; } .flow-title { align-items: flex-start; gap: 9px; } .flow-icon { width: 26px; height: 26px; } .flow-title strong { font-size: 11px; line-height: 1.7; } .flow-title span:not(.flow-icon) { font-size: 11px; } .query-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } .layout { gap: 22px; } .page-footer { flex-direction: column; gap: 6px; line-height: 1.7; } }
+</style>
+
+<style scoped>
+.layout { grid-template-columns:minmax(0,1fr); }
+.col-right { min-width:0; }
+.topbar { flex-wrap:wrap; }
 </style>

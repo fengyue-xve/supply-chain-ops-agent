@@ -89,6 +89,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, AUDIT_HISTORY_PATH).hasRole("admin")
                         // W4 待确认采购单仅 admin;同上必须排在 anyRequest().authenticated() 之前
                         .requestMatchers(HttpMethod.POST, PO_PENDING_PATH).hasRole("admin")
+                        .requestMatchers(HttpMethod.POST, "/api/demo/reset").hasRole("admin")
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

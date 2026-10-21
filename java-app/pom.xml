@@ -100,6 +100,10 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource><directory>src/main/resources</directory></resource>
+            <resource><directory>../db</directory><targetPath>demo-baseline</targetPath><includes><include>seed.sql</include><include>demo_case.sql</include></includes></resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

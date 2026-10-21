@@ -22,6 +22,7 @@ from app.agent.run import RunContext
 from app.ids import new_tool_call_id
 from app.models.base import ToolCallRequest
 from app.schemas import ToolCallRecord
+from app.tools.schema_validation import argument_errors
 
 # 与 JavaToolClient 超时文案一致：预算取消在途工具调用时复用同一降级语义。
 TOOL_TIMEOUT_ERROR = "工具调用超时，请稍后重试"
@@ -77,6 +78,8 @@ class ToolPolicy:
             return ToolDecision(False, _DECISION_APPROVAL, "该工具需要人工确认，当前未执行。")
         if call.parse_error:
             return ToolDecision(False, _DECISION_PARSE, call.parse_error)
+        if argument_errors(definition, call.params):
+            return ToolDecision(False, "schema_validation_failed", "工具参数不符合Schema，当前未执行。")
         return ToolDecision(True)
 
 

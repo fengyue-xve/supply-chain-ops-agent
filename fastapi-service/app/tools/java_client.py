@@ -8,6 +8,8 @@ from dataclasses import dataclass
 from typing import Any
 
 import httpx
+import re
+from app.errors import ApiError
 
 _DEFAULT_SCHEMA_TIMEOUT = 2.0
 
@@ -49,6 +51,31 @@ class JavaToolClient:
 
     async def aclose(self) -> None:
         await self._client.aclose()
+
+    async def authorized_schema(self, authorization: str) -> dict:
+        try:
+            response = await self._client.get("/api/agent/tools/schema", headers=_headers(None, authorization))
+        except httpx.HTTPError:
+            raise ApiError(503, "Java身份校验服务暂不可用") from None
+        if response.status_code in (401, 403):
+            raise ApiError(response.status_code, "用户凭证无效或无权读取")
+        try:
+            body = response.json()
+            if response.status_code != 200 or body.get("code") != 0 or not isinstance(body.get("data"), dict):
+                raise ValueError("invalid_schema")
+            return body["data"]
+        except (ValueError, TypeError):
+            raise ApiError(503, "Java工具契约暂不可用") from None
+
+    async def read_form(self, kind: str, identity: str, authorization: str) -> ToolCallOutcome:
+        pattern = r"R-[0-9]{4}" if kind == "records" else r"run-[0-9a-f]{12}"
+        if kind not in {"records", "runs"} or not isinstance(identity, str) or not re.fullmatch(pattern, identity):
+            return ToolCallOutcome(ok=False, error="非法只读记录编号", http_code=400)
+        try:
+            response = await self._client.get(f"/api/forms/{kind}/{identity}", headers=_headers(None, authorization))
+            return self._to_outcome(response)
+        except httpx.HTTPError:
+            return ToolCallOutcome(ok=False, error="表单只读服务暂不可用", http_code=503)
 
     async def call(
         self,

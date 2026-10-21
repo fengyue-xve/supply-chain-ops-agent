@@ -18,6 +18,7 @@ public class RequestCounters {
     public void recordApplyHit() {
         applyEndpointHits.incrementAndGet();
     }
+    public void reset() { applyEndpointHits.set(0); replayEndpointHits.set(0); }
 
     public void recordReplayHit() {
         replayEndpointHits.incrementAndGet();

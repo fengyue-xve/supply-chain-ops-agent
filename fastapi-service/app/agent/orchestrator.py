@@ -54,6 +54,7 @@ from app.agent.run import (
     RunContext,
 )
 from app.agent.tooling import TOOL_TIMEOUT_ERROR, ToolExecutor, ToolPolicy
+from app.agent.live_trace import context_layout
 from app.errors import ApiError
 from app.ids import new_conversation_id, new_request_id, new_tool_call_id
 from app.models.base import ModelProvider, ModelResponse, ToolCallRequest
@@ -163,6 +164,7 @@ class AgentOrchestrator:
             run.model_tools_count = len(model_tools)
             reference_chunks = self._retrieve_chunks(text, run)
             messages = build_messages(text, history, reference_chunks)
+            run.context_layers = context_layout(history, reference_chunks, messages)
             executor = ToolExecutor(policy, self._java_client, self._sink, run)
             final_text: str | None = None
 
