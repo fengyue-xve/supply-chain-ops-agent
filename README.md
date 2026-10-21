@@ -60,3 +60,5 @@ node scripts/browser_smoke.mjs
 建议依次阅读：[业务链路](docs/01-business-flow.md)、[运行演示](docs/02-run-demo.md)、[代码导读](docs/03-code-tour.md)、[验证与局限](docs/04-verification.md)、[来源与边界](docs/05-provenance.md)、[面试讲解](docs/06-interview.md)。
 
 当前词法检索规则集 30/30 通过，另保留一组改写检查 10/12，失败项公开保留。两者都不是模型回答准确率；早期冻结语料回归与当前业务评测分开报告。详见验证文档。
+
+界面布局参考与本轮视觉验收见 [界面说明](docs/07-interface-design.md)。

@@ -75,11 +75,13 @@ async function run(payload) {
       <button type="button" :class="{ active: mode === 'category' }" @click="mode = 'category'">按类目查询</button>
     </div>
 
-    <div v-if="mode === 'sku'">
-      <input v-model="sku" placeholder="单个 SKU，如 AUD-001" data-test="sku" />
+    <div v-if="mode === 'sku'" class="query-field">
+      <label for="sales-sku" class="field-label">商品 SKU <span>单个商品</span></label>
+      <input id="sales-sku" v-model="sku" placeholder="单个 SKU，如 AUD-001" data-test="sku" />
     </div>
     <div v-else>
-      <input v-model="category" placeholder="类目，如 audio" data-test="category" />
+      <label for="sales-category" class="field-label">商品类目</label>
+      <input id="sales-category" v-model="category" placeholder="类目，如 audio" data-test="category" />
       <div class="chips">
         <button v-for="item in quickCategories" :key="item" type="button" @click="category = item">{{ item }}</button>
       </div>

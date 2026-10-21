@@ -123,11 +123,13 @@ async function run(payload) {
       <button type="button" :class="{ active: mode === 'category' }" @click="mode = 'category'">按类目计算</button>
     </div>
 
-    <div v-if="mode === 'skus'">
-      <textarea v-model="skusText" rows="3" placeholder="多个 SKU 用逗号或换行分隔（最多 20 个）" data-test="skus" />
+    <div v-if="mode === 'skus'" class="query-field">
+      <label for="replenish-skus" class="field-label">测算商品 <span>多个 SKU 以逗号分隔</span></label>
+      <textarea id="replenish-skus" v-model="skusText" rows="2" placeholder="多个 SKU 用逗号或换行分隔（最多 20 个）" data-test="skus" />
     </div>
     <div v-else>
-      <input v-model="category" placeholder="类目，如 audio" data-test="category" />
+      <label for="replenish-category" class="field-label">商品类目</label>
+      <input id="replenish-category" v-model="category" placeholder="类目，如 audio" data-test="category" />
       <div class="chips">
         <button v-for="item in quickCategories" :key="item" type="button" @click="category = item">{{ item }}</button>
       </div>
