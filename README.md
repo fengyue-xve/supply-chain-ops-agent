@@ -2,35 +2,26 @@
 
 ## 1. 项目定位与核心架构
 
-供应链运营决策与采购表单流转 Agent 系统，覆盖库存销量查询、确定性补货试算、采购意向生成、表单只读核验与受控写入。
+Supply Chain Ops Agent 将库存、销量、补货决策和采购表单核验串成一条可审计工作流。Vue 工作台调用 FastAPI Agent；Agent 通过 Hybrid RAG 提供业务上下文，再经 MCP Streamable HTTP 访问 Java 业务服务和 MySQL。写入边界由 Java 服务掌控，Trace 事件回流到工作台。
 
-~~~mermaid
+```mermaid
 flowchart LR
-  V[Vue 工作台] --> A[FastAPI Agent]
-  A --> R[Hybrid RAG + RRF]
-  A --> M[MCP JSON-RPC 2.0]
-  A --> J[Java 业务服务]
-  J --> DB[(MySQL)]
-  J --> FR[表单 Reader]
-  A --> T[Trace 面板]
-  T --> V
-~~~
+  UI[Vue 工作台] --> API[FastAPI Agent]
+  API --> RAG[Hybrid RAG + RRF]
+  API --> MCP[MCP JSON-RPC 2.0]
+  MCP --> JAVA[Java 业务服务]
+  JAVA --> DB[(MySQL)]
+  API --> TRACE[Trace 事件流]
+  TRACE --> UI
+```
 
-## 2. 核心 AI Agent 与受控工程特性
+## 2. 核心能力与安全边界
 
-Hybrid RAG 将四层词法规则与 512 维特征向量按 RRF（k=60）融合，并通过消融集验证召回质量：
-
-| Retriever | Dev strict | Dev Recall@3 | Rephrasing strict | Rephrasing Recall@3 |
-| --- | ---: | ---: | ---: | ---: |
-| Lexical v1 | 22/30 | 0.929 | 10/12 | 0.909 |
-| Lexical v2 | 23/30 | 0.964 | 10/12 | 0.909 |
-| Lexical v3 | 30/30 | 1.000 | 10/12 | 0.909 |
-| Hybrid RAG | 30/30 | 1.000 | 12/12 | 1.000 |
-
-- 以 Streamable HTTP 暴露 MCP JSON-RPC 2.0：5 个只读工具与 3 个 Resource 模板，统一校验 Bearer 与 Origin。
-- ReplenishRules 负责安全库存、提前期、保护期和整箱箱规计算，模型只生成待确认采购草稿。
-- 采购写入使用 SKU 固定顺序行锁、pending 冲突检查和幂等键，避免跨用户重复建单。
-- Agent Trace 面板展示受限轮次、Prompt 分层、工具 Schema、耗时和停因状态；顶部支持重置演示数据。
+- **Hybrid RAG / RRF**：四层词法规则（别名、停用词、标题权重、特征词准入）与确定性 512 维向量并行检索，使用 RRF `k=60` 合并；消融结果为开发集 30/30、同义改写集 12/12 严格通过。
+- **MCP 契约**：Streamable HTTP 上提供 5 个只读工具和 3 个 Resource 模板；请求统一校验 Bearer、Origin、协议版本、参数 Schema 和工具 ACL。MCP 不暴露业务写工具。
+- **确定性补货**：`ReplenishRules` 根据库存、需求速度、安全库存、提前期、保护期和整箱箱规计算建议量；模型只生成待确认草稿。
+- **受控采购写入**：创建采购单时按 SKU 固定顺序获取行锁，配合 pending 冲突检查和幂等键，避免跨用户重复建单。
+- **Trace 与审计**：Trace 记录四层 Prompt、检索引用、工具 Schema、耗时、校验结果和 stop reason，并按凭证哈希隔离；敏感凭证和业务正文不落盘。
 
 ## 3. 工作台界面截图
 
@@ -42,17 +33,18 @@ Hybrid RAG 将四层词法规则与 512 维特征向量按 RRF（k=60）融合�
 
 | 模块 | 位置 |
 | --- | --- |
-| Hybrid RAG | [fastapi-service/app/rag/hybrid.py](fastapi-service/app/rag/hybrid.py) |
-| 消融评测 | [fastapi-service/evals/hybrid_ablation.py](fastapi-service/evals/hybrid_ablation.py) |
-| MCP 端点 | [fastapi-service/app/api/mcp.py](fastapi-service/app/api/mcp.py) |
-| 运行轨迹 | [fastapi-service/app/agent/live_trace.py](fastapi-service/app/agent/live_trace.py) |
-| Trace 面板 | [web-app/src/components/AgentTracePanel.vue](web-app/src/components/AgentTracePanel.vue) |
-| 补货规则 | [java-app/src/main/java/dev/portfolio/supply/ReplenishRules.java](java-app/src/main/java/dev/portfolio/supply/ReplenishRules.java) |
-| 采购写入 | [java-app/src/main/java/dev/portfolio/supply/PoWriteService.java](java-app/src/main/java/dev/portfolio/supply/PoWriteService.java) |
+| Hybrid RAG / RRF | [fastapi-service/app/rag/hybrid.py](fastapi-service/app/rag/hybrid.py) |
+| MCP 端点与 5 tools / 3 resources | [fastapi-service/app/api/mcp.py](fastapi-service/app/api/mcp.py) |
+| 工具契约 | [contracts/tools-schema.json](contracts/tools-schema.json) |
+| 受限 Agent loop | [fastapi-service/app/agent/orchestrator.py](fastapi-service/app/agent/orchestrator.py) |
+| Trace 事件与隔离 | [fastapi-service/app/agent/live_trace.py](fastapi-service/app/agent/live_trace.py) |
+| 确定性补货 | [java-app/src/main/java/com/demo/supplyagent/service/ReplenishRules.java](java-app/src/main/java/com/demo/supplyagent/service/ReplenishRules.java) |
+| SKU 行锁与幂等写入 | [java-app/src/main/java/com/demo/supplyagent/service/PoWriteService.java](java-app/src/main/java/com/demo/supplyagent/service/PoWriteService.java) |
+| 评测入口 | [fastapi-service/evals/run.py](fastapi-service/evals/run.py) |
 
-## 5. 本地快速启动与自动化验证
+## 5. 本地启动与验证
 
-~~~powershell
+```powershell
 python scripts/demo.py prepare
 python scripts/demo.py init-db
 python scripts/demo.py start
@@ -61,6 +53,8 @@ python scripts/e2e.py
 node scripts/browser_smoke.mjs
 python scripts/agent-upgrade-smoke.py
 python fastapi-service/evals/hybrid_ablation.py
-~~~
+```
 
-MCP 官方 SDK smoke 与完整矩阵见 [docs/architecture.md](docs/architecture.md)。
+验证口径：33 条固定用例的离线协议回放 + 73 条 E2E/集成回归，另含 MCP 官方 SDK smoke、Hybrid RAG 消融和 Trace 隔离检查。报告写入被忽略的 `artifacts/` 或 `docs/internal/`，不进入公开树。架构、协议面和验证矩阵见 [docs/architecture.md](docs/architecture.md)。
+
+MIT 许可证见 [LICENSE](LICENSE)。仓库当前没有额外 NOTICE 文件；版权和许可文本以顶层 LICENSE 为准。

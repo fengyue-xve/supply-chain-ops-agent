@@ -13,8 +13,9 @@
 **/playwright-report/
 **/evals/reports/
 **/traces/
+/artifacts/
+/docs/internal/
 runtime/
-artifacts/
 *.log
 *.pyc
 .idea/
