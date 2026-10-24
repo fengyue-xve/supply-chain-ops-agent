@@ -17,7 +17,7 @@ flowchart LR
 
 ## 2. 核心能力与安全边界
 
-- **Hybrid RAG / RRF**：使用 512 维确定性特征哈希向量、四层词法规则（别名、停用词、标题权重、特征词准入）与 RRF 倒数秩融合；它不是训练型 Embedding，改写集只作为回归审计集。Hybrid 在开发集 30/30、改写集 12/12，Recall@3 为 1.0，forbidden 为 0。实时库存与销量强制通过 Java 工具现查现取，工具返回是唯一可信的实时数据源；检索文档隔离注入 `<参考文档>` 区块并声明为非执行指令。
+- **Hybrid RAG / RRF**：使用 512 维确定性特征哈希向量、四层词法规则（别名、停用词、标题权重、特征词准入）与 RRF 倒数秩融合；它不是训练型 Embedding，改写集只作为回归审计集。Hybrid 在开发集 30/30、改写集 12/12，Recall@3 为 1.0，forbidden 为 0，详见[静态消融结果](docs/eval/hybrid-ablation.json)。实时库存与销量强制通过 Java 工具现查现取，工具返回是唯一可信的实时数据源；检索文档隔离注入 `<参考文档>` 区块并声明为非执行指令。
 - **MCP 契约**：Streamable HTTP 上提供 5 个只读工具和 3 个 Resource 模板；请求统一校验 Bearer、Origin、协议版本、参数 Schema 和工具 ACL。MCP 不暴露业务写工具。
 - **确定性补货**：`ReplenishRules` 根据库存、需求速度、安全库存、提前期、保护期和整箱箱规计算建议量；模型只生成待确认草稿。
 - **受控采购写入**：创建采购单时按 SKU 固定顺序获取行锁，配合 pending 冲突检查和幂等键，避免跨用户重复建单。
@@ -55,6 +55,6 @@ python scripts/agent-upgrade-smoke.py
 python fastapi-service/evals/hybrid_ablation.py
 ```
 
-验证口径：33 条固定用例的离线协议回放 + 73 条 E2E/集成回归，另含 MCP 官方 SDK smoke、Hybrid RAG 消融和 Trace 隔离检查。报告写入被忽略的 `artifacts/` 或 `docs/internal/`，不进入公开树。架构、协议面和验证矩阵见 [docs/architecture.md](docs/architecture.md)。
+验证口径：33 条固定用例的离线协议回放 + 73 条 E2E/集成回归，另含 MCP 官方 SDK smoke、Hybrid RAG 消融和 Trace 隔离检查。Hybrid 静态结果与数据摘要见 [docs/eval/hybrid-ablation.json](docs/eval/hybrid-ablation.json)；架构、协议面和验证矩阵见 [docs/architecture.md](docs/architecture.md)。
 
 MIT 许可证见 [LICENSE](LICENSE)。仓库当前没有额外 NOTICE 文件；版权和许可文本以顶层 LICENSE 为准。
