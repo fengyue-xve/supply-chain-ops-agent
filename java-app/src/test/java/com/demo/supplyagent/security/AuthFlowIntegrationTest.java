@@ -237,7 +237,7 @@ class AuthFlowIntegrationTest {
             login("admin", "admin123").andExpect(status().isOk());
             String token = loginToken("viewer", "viewer123");
             login("admin", "wrong-password").andExpect(status().isUnauthorized());
-            callStockToolWithToken(token.substring(0, token.length() - 1) + "x")
+            callStockToolWithToken(tamperSignature(token))
                     .andExpect(status().isUnauthorized());
         } finally {
             projectLogger.detachAppender(appender);
@@ -297,5 +297,12 @@ class AuthFlowIntegrationTest {
                 .expiration(Date.from(now.minusSeconds(3600)))
                 .signWith(key, Jwts.SIG.HS256)
                 .compact();
+    }
+
+    private String tamperSignature(String token) {
+        int signatureStart = token.lastIndexOf('.') + 1;
+        char original = token.charAt(signatureStart);
+        char replacement = original == 'A' ? 'B' : 'A';
+        return token.substring(0, signatureStart) + replacement + token.substring(signatureStart + 1);
     }
 }
